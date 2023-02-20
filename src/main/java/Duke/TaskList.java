@@ -25,9 +25,12 @@ public class TaskList {
     /**
      * The constructor that uses to create a TaskList instance.
      */
+//    public TaskList() {
+//        this.taskList = new ArrayList<>(100);
+//        this.index = 0;
+//    }
     public TaskList() {
-        this.taskList = new ArrayList<>(100);
-        this.index = 0;
+        super();
     }
 
     public TaskList(BufferedReader strTasks) throws FileException, CommandNotFoundException {
@@ -48,8 +51,10 @@ public class TaskList {
      * @return The size of the list.
      */
     public int getSize() {
-        return this.index;
+//        return this.index;
+        return this.taskList.size();
     }
+
 
     /**
      * Get the specific task correspond to the given index.
@@ -83,23 +88,23 @@ public class TaskList {
      * @param input The index of the task that need to be deleted.
      */
 
-    public String  delete(int input) {
-        Task currTask = this.taskList.get(input - 1);
-        this.taskList.remove(input);
-        this.index--;
-        String output = String.format(LINES +
-                "\tNoted. I've removed this task:" +
-                "\t\t" + currTask.toString() +
-                "\tNow you have " + this.index + " tasks in the list." +
-                LINES);
-//        System.out.println("\t--------------------------");
-//        System.out.println("\tNoted. I've removed this task:");
-//        System.out.println("\t\t" + currTask.toString());
-//        System.out.println("\tNow you have " + this.index + " tasks in the list.");
-//        System.out.println("\t--------------------------");
-        System.out.println(output);
-        return output;
-    }
+//    public String  delete(int input) {
+//        Task currTask = this.taskList.get(input - 1);
+//        this.taskList.remove(input);
+//        this.index--;
+//        String output = String.format(LINES +
+//                "\tNoted. I've removed this task:" +
+//                "\t\t" + currTask.toString() +
+//                "\tNow you have " + this.index + " tasks in the list." +
+//                LINES);
+////        System.out.println("\t--------------------------");
+////        System.out.println("\tNoted. I've removed this task:");
+////        System.out.println("\t\t" + currTask.toString());
+////        System.out.println("\tNow you have " + this.index + " tasks in the list.");
+////        System.out.println("\t--------------------------");
+//        System.out.println(output);
+//        return output;
+//    }
 
     /**
      * Add the task of Todo type into the task list.

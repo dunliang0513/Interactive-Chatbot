@@ -33,7 +33,7 @@ public class Parser {
      */
     public static Command parse(String input) throws CommandNotFoundException, IOException {
         assert (input != null) : "The Duke.command cannot be null.";
-        String[] splitCommand = input.split(" ");
+        String[] splitCommand = input.split(" ", 2);
         String command = splitCommand[0].toUpperCase();
         String splitDescription;
         Command cmd;
@@ -42,19 +42,34 @@ public class Parser {
             cmd = new ExitCommand();
             break;
         case "LIST":
-            t.list();
+//            t.list();
             cmd = new ListCommand();
             break;
         case "MARK":
-            t.mark(Integer.parseInt(splitCommand[1]));
-            cmd = new MarkCommand(Integer.parseInt(splitCommand[1]));
+//            t.mark(Integer.parseInt(splitCommand[1]));
+//            cmd = new MarkCommand(Integer.parseInt(splitCommand[1]));
+            try {
+                int index = Integer.parseInt(input.substring(5));
+                cmd = new MarkCommand(index);
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                // incorrect syntax
+                throw new InvalidIndexException();
+            }
             break;
         case "UNMARK":
-            t.unmark(Integer.parseInt(splitCommand[1]));
-            cmd = new UnmarkCommand(Integer.parseInt(splitCommand[1]));
+//            t.unmark(Integer.parseInt(splitCommand[1]));
+//            cmd = new UnmarkCommand(Integer.parseInt(splitCommand[1]));
+            try {
+                int index = Integer.parseInt(input.substring(5));
+                cmd = new UnmarkCommand(index);
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                // incorrect syntax
+                throw new InvalidIndexException();
+            }
             break;
         case "DELETE":
-            t.delete(Integer.parseInt(splitCommand[1]));
+//            t.delete(Integer.parseInt(splitCommand[1]));
+//            cmd = new DeleteCommand(Integer.parseInt(splitCommand[1]) );
             try {
                 int index = Integer.parseInt(input.substring(7));
                 cmd = new DeleteCommand(index);
@@ -66,21 +81,21 @@ public class Parser {
             splitDescription = input.split(" ", 2).length == 2
                     ? input.split(" ", 2)[1]
                     : "";
-            t.addTodo(splitDescription);
+//            t.addTodo(splitDescription);
             cmd = new AddTodoCommand(splitDescription);
             break;
         case "DEADLINE":
             splitDescription = input.split(" ", 2).length == 2
                     ? input.split(" ", 2)[1]
                     : "";
-            t.addDeadline(splitDescription);
+//            t.addDeadline(splitDescription);
             cmd = new AddDeadlineCommand(splitDescription);
             break;
         case "EVENT":
             splitDescription = input.split(" ", 2).length == 2
                     ? input.split(" ", 2)[1]
                     : "";
-            t.addEvent(splitDescription);
+//            t.addEvent(splitDescription);
             cmd = new AddEventCommand(splitDescription);
             break;
         case "FIND":

@@ -1,10 +1,15 @@
 package Duke;
 
+import Duke.Storage.Storage;
 import Duke.Tasks.Task;
+
+import java.util.Scanner;
 
 public class Ui {
     private static final String LINES = "\t--------------------------\n";
+    private Scanner scanner;
     public Ui() {
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -22,14 +27,23 @@ public class Ui {
         return output;
     }
 
+    public String printLine() {
+        System.out.println(LINES);
+        return LINES;
+    }
+
+    public String scanInput() {
+        return this.scanner.nextLine();
+    }
+
     public String printMarked(Task task) {
-        String output = String.format("Nice! I've marked this task as done:%s", task);
+        String output = String.format("Nice! I've marked this task as done:\n%s", task);
         System.out.println(output);
         return output;
     }
 
     public String printUnmarked(Task task) {
-        String output = String.format("Nice! I've marked this task as not done yet:%s", task);
+        String output = String.format("Nice! I've marked this task as not done yet:\n%s", task);
         System.out.println(output);
         return output;
     }
@@ -46,15 +60,22 @@ public class Ui {
         return output;
     }
 
-    public String printStoredTasks(TaskList taskList) {
-        String output = String.format("File has been stored!\n%s",taskList.toFormattedString());
+    public String printCommandError(String input, Exception exception) {
+        String output = String.format("%s\nCommand: %s", exception.toString(), input);
         System.out.println(output);
         return output;
     }
 
-    public String printAddedTask(Task task, TaskList tasks) {
+    public String printStoredTasks(Storage storage, TaskList taskList) {
+        String output = String.format("%s has been updated\nThese are your tasks\n%s"
+                ,storage.getFilePath(), taskList.toFormattedString());
+        System.out.println(output);
+        return output;
+    }
+
+    public String printAddedTask(Task task, TaskList taskList) {
         String output = String.format("Got it. I've added this task:\n%s", task.toString());
-        output += String.format("\nNow you have %d tasks in the list.", tasks.getSize());
+        output += String.format("\nNow you have %d tasks in the list.", taskList.getSize());
         System.out.println(output);
         return output;
     }

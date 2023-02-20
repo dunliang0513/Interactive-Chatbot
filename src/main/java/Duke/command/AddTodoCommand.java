@@ -14,9 +14,9 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeMainExceptions {
+    public String execute(TaskList taskList, Storage storage, Ui ui) throws DukeMainExceptions {
         Todo newTodo = new Todo(this.description);
-        tasks.addTask(newTodo, storage);
-        return ui.printAddedTask(newTodo, tasks);
+        taskList.addTask(newTodo, storage);
+        return ui.printAddedTask(newTodo, taskList);
     }
 }
